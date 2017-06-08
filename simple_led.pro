@@ -1,0 +1,25 @@
+QT        += core
+
+DEFINES += STM32F10X_HD
+
+TARGET     = Tools
+
+TEMPLATE   = app
+
+SOURCES   += ./USER/*.c
+SOURCES   += ./SYSTEM/*.c
+SOURCES   += ./STM32F10x_FWLib/src/*.c
+SOURCES   += ./HARDWARE/*.c
+
+HEADERS   += ./USER/*.h
+HEADERS   += ./SYSTEM/*.h
+HEADERS   += ./STM32F10x_FWLib/inc/*.h
+HEADERS   += ./HARDWARE/*.h
+HEADERS   += ./CORE/*.h
+
+
+INCLUDEPATH += ./USER
+INCLUDEPATH += ./SYSTEM
+INCLUDEPATH += ./STM32F10x_FWLib/inc
+INCLUDEPATH += ./HARDWARE
+INCLUDEPATH += ./CORE
