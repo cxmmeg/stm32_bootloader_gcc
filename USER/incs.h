@@ -15,7 +15,7 @@
 
 #define TRUE    1
 #define FALSE   0
-
+//#define STDIO
 
 #define RAM_BASE                        0x20000000
 #define APP_OFFSET_SRAM                 0x200
@@ -42,6 +42,13 @@ typedef struct _System
 } System;
 #pragma pack()
 
+#ifdef STDIO
+void usart_send_blocking(USART_TypeDef * uart, unsigned char val);
+unsigned char usart_recv_blocking(USART_TypeDef * uart);
+int _write(int fd, char *ptr, int len);
+int _read(int fd, char *ptr, int len);
+void get_buffered_line(void);
+#endif
 
 
 #endif

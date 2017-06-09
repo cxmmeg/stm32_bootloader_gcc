@@ -1,4 +1,5 @@
 #include "incs.h"
+#include <stdio.h>
 
 static void print_usage(void)
 {
@@ -15,6 +16,7 @@ static void print_usage(void)
     put_string("[g]: Print Mem, Address:0x20000200.\n\r");
 }
 
+
 static void Jump_2_App(unsigned int addr)
 {
     pFunction ApplicationRun;
@@ -23,6 +25,8 @@ static void Jump_2_App(unsigned int addr)
     __set_MSP(*(unsigned int*)addr);
     ApplicationRun();
 }
+
+#ifndef STDIO
 
 static unsigned char get_user_input(void)
 {
@@ -45,6 +49,9 @@ static unsigned char get_user_input(void)
 
     return ret;
 }
+
+#endif
+
 
 static void led_test(void)
 {
@@ -185,6 +192,7 @@ static void write_firm_to_Flash(unsigned int src, unsigned int dst)
 int main()
 {
     unsigned char menu_index;
+    char str[100];
     NVIC_Configuration();
     system_init();
     delay_init();
@@ -195,8 +203,13 @@ int main()
     while (1)
     {
         print_usage();
-
+#ifdef STDIO
+        scanf("%s", str);
+        menu_index = str[0];
+#else
         menu_index = get_user_input();
+#endif
+
         switch (menu_index)
         {
         case 'a':
